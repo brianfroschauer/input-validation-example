@@ -21,7 +21,11 @@ class UserServiceImpl(private val repository: UserRepository) : UserService {
     override fun update(id: Long, user: User): User {
         return repository
                 .findById(id)
-                .map { old -> repository.save(old.copy(firstName = user.firstName, lastName = user.lastName)) }
+                .map { old -> repository.save(old.copy(
+                        firstName = user.firstName,
+                        lastName = user.lastName,
+                        age = user.age))
+                }
                 .orElseThrow { NotFoundException() }
     }
 
