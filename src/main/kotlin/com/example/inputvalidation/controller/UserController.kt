@@ -2,14 +2,13 @@ package com.example.inputvalidation.controller
 
 import com.example.inputvalidation.dto.*
 import com.example.inputvalidation.service.UserService
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
 @RestController
 @RequestMapping("users")
-class UserController(@Autowired private val service: UserService) {
+class UserController(private val service: UserService) {
 
     @GetMapping
     fun findAll(): ResponseEntity<List<UserDTO>> {

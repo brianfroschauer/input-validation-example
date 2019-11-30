@@ -16,7 +16,7 @@ class MetricServiceImpl(private val repository: MetricRepository) : MetricServic
                 .orElseThrow { NotFoundException() }
     }
 
-    override fun avg(name: String): Long {
+    override fun average(name: String): Long {
         val metric = findOne(name)
         return metric.time / metric.samples
     }

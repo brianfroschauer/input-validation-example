@@ -8,7 +8,7 @@ interface MetricService {
 
     fun findOne(name: String): Metric
 
-    fun avg(name: String): Long
+    fun average(name: String): Long
 
     fun create(name: String, time: Long): Metric
 
