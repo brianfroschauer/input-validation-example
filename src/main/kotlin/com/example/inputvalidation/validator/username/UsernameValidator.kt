@@ -1,11 +1,13 @@
 package com.example.inputvalidation.validator.username
 
-import javax.validation.ConstraintValidator
+import com.example.inputvalidation.validator.Validator
 import javax.validation.ConstraintValidatorContext
 
-class UsernameValidator : ConstraintValidator<Username, CharSequence> {
+class UsernameValidator : Validator<Username, CharSequence>() {
 
-    override fun isValid(value: CharSequence, context: ConstraintValidatorContext?): Boolean {
+    override var name = "username"
+
+    override fun matches(value: CharSequence, context: ConstraintValidatorContext?): Boolean {
         val pattern = Regex("^(?=.{8,20}\$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])\$")
         return pattern.matches(value)
     }
