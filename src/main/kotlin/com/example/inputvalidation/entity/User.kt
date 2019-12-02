@@ -20,6 +20,9 @@ data class User (
     @Column(name = "password", nullable = false)
     val password: String = "",
 
+    @Column(name = "state", nullable = false)
+    val state: String = "",
+
     @Column(name = "age", nullable = false)
     val age: Int = 0
 )

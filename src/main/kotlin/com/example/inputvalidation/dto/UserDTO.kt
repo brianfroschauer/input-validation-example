@@ -4,6 +4,7 @@ import com.example.inputvalidation.entity.User
 import com.example.inputvalidation.validator.age.Age
 import com.example.inputvalidation.validator.name.Name
 import com.example.inputvalidation.validator.password.Password
+import com.example.inputvalidation.validator.state.State
 import com.example.inputvalidation.validator.username.Username
 import javax.validation.constraints.NotNull
 
@@ -12,6 +13,7 @@ data class UserDTO(
         val firstName: String,
         val lastName: String,
         val username: String,
+        val state: String,
         val age: Int
 )
 
@@ -24,6 +26,8 @@ data class CreateUserDTO(
         val username: String,
         @field:NotNull @field:Password
         val password: String,
+        @field:NotNull @field:State
+        val state: String,
         @field:NotNull @field:Age
         val age: Int
 )
@@ -33,6 +37,8 @@ data class UpdateUserDTO(
         val firstName: String,
         @field:NotNull @field:Name
         val lastName: String,
+        @field:NotNull @field:State
+        val state: String,
         @field:NotNull @field:Age
         val age: Int
 )
@@ -42,6 +48,7 @@ fun User.toUserDTO() = UserDTO(
         firstName = firstName,
         lastName = lastName,
         username = username,
+        state = state,
         age = age
 )
 
@@ -50,11 +57,13 @@ fun CreateUserDTO.toUser() = User(
         lastName = lastName,
         username = username,
         password = password,
+        state= state,
         age = age
 )
 
 fun UpdateUserDTO.toUser() = User(
         firstName = firstName,
         lastName = lastName,
+        state = state,
         age = age
 )
