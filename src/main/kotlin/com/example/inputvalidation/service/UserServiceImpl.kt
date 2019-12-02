@@ -1,6 +1,7 @@
 package com.example.inputvalidation.service
 
 import com.example.inputvalidation.entity.User
+import com.example.inputvalidation.exception.AlreadyExistsException
 import com.example.inputvalidation.exception.NotFoundException
 import com.example.inputvalidation.repository.UserRepository
 import org.springframework.stereotype.Service
@@ -14,9 +15,21 @@ class UserServiceImpl(private val repository: UserRepository) : UserService {
                .orElseThrow { NotFoundException() }
     }
 
+    override fun findOne(username: String): User {
+        return repository
+                .findByUsername(username)
+                .orElseThrow { NotFoundException() }
+    }
+
     override fun findAll(): List<User> = repository.findAll()
 
-    override fun create(user: User): User = repository.save(user)
+    override fun create(user: User): User {
+        repository
+                .findByUsername(user.username)
+                .ifPresent { throw AlreadyExistsException() }
+
+        return repository.save(user)
+    }
 
     override fun update(id: Long, user: User): User {
         return repository

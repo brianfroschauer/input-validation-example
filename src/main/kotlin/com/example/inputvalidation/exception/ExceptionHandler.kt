@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest
 class ExceptionHandler : ResponseEntityExceptionHandler() {
 
     @ExceptionHandler(value = [NotFoundException::class])
-    fun handle(exception: NotFoundException, request: HttpServletRequest): ResponseEntity<ApiError> {
+    fun handleNotFound(exception: NotFoundException, request: HttpServletRequest): ResponseEntity<ApiError> {
         return ResponseEntity(
                 ApiError(
                         Date(),
@@ -20,6 +20,18 @@ class ExceptionHandler : ResponseEntityExceptionHandler() {
                         "Resource not found",
                         request.requestURI),
                 HttpStatus.NOT_FOUND
+        )
+    }
+
+    @ExceptionHandler(value = [AlreadyExistsException::class])
+    fun handleAlreadyExists(exception: AlreadyExistsException, request: HttpServletRequest): ResponseEntity<ApiError> {
+        return ResponseEntity(
+                ApiError(
+                        Date(),
+                        HttpStatus.CONFLICT.value(),
+                        "Already exists",
+                        request.requestURI),
+                HttpStatus.CONFLICT
         )
     }
 }

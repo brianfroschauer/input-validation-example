@@ -6,6 +6,8 @@ interface UserService {
 
     fun findAll(): List<User>
 
+    fun findOne(username: String): User
+
     fun findOne(id: Long): User
 
     fun create(user: User): User
